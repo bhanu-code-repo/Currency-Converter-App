@@ -1,0 +1,33 @@
+:root {
+  --primary-color: #5fbaa7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("assets/currency_exchange_image.jpg"); /* Path to your currency exchange image */
+  background-size: contain;
+  background-repeat: repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currency-converter {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 100%;
+}
