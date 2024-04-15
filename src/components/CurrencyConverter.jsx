@@ -180,9 +180,15 @@ export default function CurrencyConverter() {
 
   useEffect(
     function () {
+      // Create a controller for the fetch request
+      const controller = new AbortController();
+
       async function convertCurrency() {
         const response = await fetch(
-          `https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`
+          `https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`,
+          {
+            signal: controller.signal,
+          }
         );
         const data = await response.json();
         setConvertedAmount(data.rates[targetCurrency]);
@@ -193,6 +199,11 @@ export default function CurrencyConverter() {
 
       // Convert currency if base and target currencies are different
       convertCurrency();
+
+      // Fix race condition
+      return function () {
+        controller.abort();
+      };
     },
     [amount, baseCurrency, targetCurrency]
   );
